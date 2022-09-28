@@ -2,3 +2,12 @@
 <img align="center" alt="Coding" width="1200" src="https://user-images.githubusercontent.com/82140495/192852374-0c98a0ae-64e8-480d-8ef6-35aaf55f677f.png">
 
 <h1 align="center">Early Detection of Chronic kindey disease using machine learning</h1>
+
+<h2><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/People%20with%20professions/Man%20Technologist%20Light%20Skin%20Tone.png" width="40px"> Team Members: </h2> 
+<ul><i>
+  <li> Shruthi.P.G </li>
+  <li> Vino.S </li>
+  <li> Sindhuja.V </li>
+  <li> Mayakannan.L </li>
+  </i>
+  </ul>
