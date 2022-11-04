@@ -1,4 +1,4 @@
-<h1 align="center">Hi 👋, I'm Balaji</h1>
+<h1 align="center">Hi 👋</h1>
 
 
 <h1 align="center">Early Detection of Chronic kindey disease using machine learning</h1>
