@@ -1,8 +1,8 @@
 @import url('');
 /* Style the demobox links */
 #demobox {
-  background-image: linear-gradient(#5F0A87, #A4508B);
-  height: 125px;
+  background-image: linear-gradient(#3f5efb,#fc466b);
+  height: 175px;
   padding: 15px;
   width: auto;
   text-align: center;
@@ -13,13 +13,17 @@
 }
 /* Style the select links */
 select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  width: 500px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #fff;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 3);
+  outline: none;
+  color: #092756;
+  font-size: 13px;
   border-radius: 4px;
-  box-sizing: border-box;
+  
 }
 /* Style the imgcontainer links */
 .imgcontainer {
@@ -85,13 +89,13 @@ select {
 /* Add padding to containers */
 .container {
   padding: 16px;
-   
+  width: 100%;
   margin: auto;
 }
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
+input[type="number"] {
+  width: 500px;
   padding: 15px;
   margin: 5px 0 22px 0;
   display: inline-block;
@@ -112,15 +116,16 @@ hr {
 
 /* Set a style for the submit/register button */
 .registerbtn {
-  background-color: #04AA6D;
-  color: white;
+  background-color:#fc466b;
+  color:black;
   padding: 16px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 500px;
   opacity: 0.9;
-  font-family: cursive;
+  font-family: 'Courier New', Courier, monospace; 
+  font-size: large;
 }
 
 .registerbtn:hover {
@@ -140,3 +145,7 @@ a {
 h1{
   font-family: 'Pacifico', cursive;
 }
+ h4{
+  font-family: 'Courier New', Courier, monospace; 
+
+ }

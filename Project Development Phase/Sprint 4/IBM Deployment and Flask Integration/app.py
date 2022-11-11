@@ -1,15 +1,15 @@
-import pickle
-
-import numpy as np
-import pandas as pd
 import requests
-from flask import Flask, redirect, render_template, request, url_for
+import pandas as pd
+import numpy as np
 
+from flask import Flask, request, render_template, url_for, redirect
+import pickle
+import requests
 
 # NOTE: you must manually set API_KEY below using information retrieved from your IBM Cloud account.
 API_KEY = "YbH1Jt5lA7lHvNhNPEUuKjdais91dxeOYYnHDbLraG2b"
 token_response = requests.post('https://iam.cloud.ibm.com/identity/token', data={"apikey":
-API_KEY, "grant_type": 'urn:ibm:params:oauth:grant-type:apikey'})
+ API_KEY, "grant_type": 'urn:ibm:params:oauth:grant-type:apikey'})
 mltoken = token_response.json()["access_token"]
 
 header = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + mltoken}
@@ -33,65 +33,60 @@ def my_home():
     return render_template('home.html')
 
 @app.route('/predict', methods = ['POST'])  #route to show the predictions in the web UI 
-def predict():    
-    
+def predict():
 
     #reading inputs given by the user
     
+    blood_urea = request.form["blood_urea"]
+    blood_glucose_random = request.form["blood glucose random"]
+    coronary_artery_disease = request.form["coronary_artery_disease"]
+    anemia = request.form["anemia"]
+    pus_cell = request.form["pus_cell"]
+    red_blood_cells = request.form["red_blood_cells"]
+    diabetesmellitus = request.form["diabetesmellitus"]
+    pedal_edema = request.form["pedal_edema"]
 
-    input_features = []
-    if request.method == 'POST':
-        input_features.append(request.form.get("blood_urea"))
-        input_features.append(request.form.get("blood glucose random"))
-        cad = request.form.get("coronary_artery_disease")
-        if cad == 'Yes':
-            input_features.append(1)
-        else:
-            input_features.append(0)
-        ane = request.form.get("anemia")
-        if ane == 'Yes':
-            input_features.append(1)
-        else:
-            input_features.append(0)
-        pc = request.form.get("pus_cell")
-        if pc == 'Normal':
-            input_features.append(1)
-        else:
-            input_features.append(0)
-        rbc = request.form.get("red_blood_cells")
-        if rbc == 'Normal':
-            input_features.append(1)
-        else:
-            input_features.append(0)
-        db = request.form.get("diabetesmellitus")
-        if db == 'Yes':
-            input_features.append(1)
-        else:
-            input_features.append(0)
-        pe = request.form.get("pedal_edema")
-        if pe == 'Yes':
-            input_features.append(1)
-        else:
-            input_features.append(0)
-
+    if (coronary_artery_disease == 'Yes'):
+        c1 = 1
+    else:
+        c1 = 0
+    if (anemia == 'Yes'):
+        a1 = 1
+    else:
+        a1 = 0
+    if (pus_cell == 'Normal'):
+        p1 = 1
+    else:
+        p1 = 0
+    if (red_blood_cells == 'Normal'):
+        r1 = 1
+    else:
+        r1 = 0
+    if(diabetesmellitus == 'Yes'):
+        d1 = 1
+    else:
+        d1 = 0
+    if(pedal_edema == 'Yes'):
+        p2 = 1
+    else:
+        p2 = 0
     
-    # NOTE: manually define and pass the array(s) of values to be scored in the next line
+    t = [[int(blood_urea),int(blood_glucose_random),int(c1),int(a1),int(p1),int(r1),int(d1),int(p2)]]
+    print(t)
+           
     payload_scoring = {"input_data": [{"field": [['blood_urea','blood glucose random','coronary_artery_disease','anemia','pus_cell',
-    'red_blood_cells','diabetesmellitus','pedal_edema']], "values": [[129,99,1,0,0,1,0,1]]}]}
+    'red_blood_cells','diabetesmellitus','pedal_edema']], "values": t}]}
 
-    response_scoring = requests.post('https://us-south.ml.cloud.ibm.com/ml/v4/deployments/fea5ce93-1b6c-4336-9e52-ff633c33be47/predictions?version=2022-11-09', json=payload_scoring,
-    headers={'Authorization': 'Bearer ' + mltoken})
+    response_scoring = requests.post('https://us-south.ml.cloud.ibm.com/ml/v4/deployments/22964015-8997-4dc4-a352-f309cbc4907c/predictions?version=2022-11-11', json=payload_scoring,
+ headers={'Authorization': 'Bearer ' + mltoken})
     print("Scoring response")
     predictions = response_scoring.json()
-    prediction = predictions['predictions'][0]['values'][0][0] 
-    a = "Happy You Don't Have Chronic kidney disease"
-    b = "Oops! You have chronic kidney disease"
-    if prediction==1:
-        return render_template('result.html',answer=b)
-    elif prediction==0:
-        return render_template('result.html',answer=a)
-    else:
-        pass
+    pred = predictions['predictions'][0]['values'][0][0]
+    print(pred)
+
+    
+     
+    return render_template('result.html',pred = pred)
 
 if __name__ == '__main__':
     app.run(debug = True)   #Running the app

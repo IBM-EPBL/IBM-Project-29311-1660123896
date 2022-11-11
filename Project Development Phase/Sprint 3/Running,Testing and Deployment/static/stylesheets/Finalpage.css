@@ -27,7 +27,16 @@ size{
 }
 .center2 {
   display: block;
+  margin-left: 500px;
+  margin-right: auto;
+  width: 50%;
+}
+.center3{
+  display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+h4{
+  font-family: 'Courier New', Courier, monospace; 
 }

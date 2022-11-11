@@ -58,7 +58,7 @@ def predict():
         p1 = 1
     else:
         p1 = 0
-    if (red_blood_cells == 'Abnormal'):
+    if (red_blood_cells == 'Normal'):
         r1 = 1
     else:
         r1 = 0
@@ -77,7 +77,7 @@ def predict():
     payload_scoring = {"input_data": [{"field": [['blood_urea','blood glucose random','coronary_artery_disease','anemia','pus_cell',
     'red_blood_cells','diabetesmellitus','pedal_edema']], "values": t}]}
 
-    response_scoring = requests.post('https://us-south.ml.cloud.ibm.com/ml/v4/deployments/fea5ce93-1b6c-4336-9e52-ff633c33be47/predictions?version=2022-11-09', json=payload_scoring,
+    response_scoring = requests.post('https://us-south.ml.cloud.ibm.com/ml/v4/deployments/22964015-8997-4dc4-a352-f309cbc4907c/predictions?version=2022-11-11', json=payload_scoring,
  headers={'Authorization': 'Bearer ' + mltoken})
     print("Scoring response")
     predictions = response_scoring.json()
